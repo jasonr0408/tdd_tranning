@@ -35,11 +35,20 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
+        $this->mapExampleRoutes();
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
 
         //
+    }
+
+    protected function mapExampleRoutes()
+    {
+        Route::prefix('example')
+             ->middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/example.php'));
     }
 
     /**

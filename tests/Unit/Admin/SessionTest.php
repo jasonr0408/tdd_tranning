@@ -24,8 +24,8 @@ class SessionTest extends TestCase
         $_Request->shouldReceive('input')
             ->withAnyArgs()
             ->andReturn(array(
-                'username' => 'jr',
-                'password' => 'qwe123',
+                // 'username' => 'jr',
+                // 'password' => 'qwe123',
             ));
         $oSession = new Session();
         $aResult = $oSession->login($_Request);

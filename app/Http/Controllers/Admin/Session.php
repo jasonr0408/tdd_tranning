@@ -14,6 +14,11 @@ class Session extends Controller
 {
     public function login(Request $_Request)
     {
+        $sUsername = $_Request->input('username');
+        $sPassword = $_Request->input('password');
+        $aUserData = $_oAvengerList->where('username', $sUsername)->get()->first()->toArray();
+        // $bCorrectPassword = $sPassword === $aUserData['password'];
+
         return response()->json(['result' => true, 'data' => 'login succeed']);
     }
 

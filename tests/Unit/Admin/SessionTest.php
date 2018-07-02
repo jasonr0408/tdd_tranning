@@ -18,21 +18,34 @@ class SessionTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testSessionCase1()
-    {
-        $_Request = Mockery::mock(Request::class);
-        $_Request->shouldReceive('input')
-            ->withAnyArgs()
-            ->andReturn(array(
-                // 'username' => 'jr',
-                // 'password' => 'qwe123',
-            ));
-        $oSession = new Session();
-        $aResult = $oSession->login($_Request);
-        $aEecepted = response()->json(['result' => true, 'data' => 'login succeed']);
+    // public function testSessionCase1()
+    // {
+        // $_Request = Mockery::mock(Request::class);
+        // $_Request->shouldReceive('input')
+        //     ->withAnyArgs()
+        //     ->andReturn(array(
+        //     ));
+        // $oSession = new Session();
+        // $aResult = $oSession->login($_Request);
+        // $aEecepted = response()->json(['result' => true, 'data' => 'login succeed']);
 
-        $this->assertEquals($aEecepted, $aResult);
+        // $this->assertEquals($aEecepted, $aResult);
+    // }
 
-    }
+    // public function testSessionCase2()
+    // {
+        // $_Request = Mockery::mock(Request::class);
+        // $_Request->shouldReceive('input')
+        //     ->withAnyArgs()
+        //     ->andReturn(array(
+        //         'username' => 'jr',
+        //         'password' => 'qwe123',
+        //     ));
+        // $oSession = new Session();
+        // $aResult = $oSession->login($_Request);
+        // $aEecepted = response()->json(['result' => true, 'data' => 'login succeed']);
+
+        // $this->assertEquals($aEecepted, $aResult);
+    // }
 
 }

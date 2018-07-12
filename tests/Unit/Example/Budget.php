@@ -44,9 +44,13 @@ class Budget
                     $iMoney = $this->getRepostiroyMoney($iYear, $iMonth) / $iDayCount * $iTotalDay;
                 } elseif ($iMonth == $iEndMonth) {
                     $iTotalDay = $iEndday;
+                    $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
                     $iMoney = $this->getRepostiroyMoney($iYear, $iMonth) / $iDayCount * $iTotalDay;
+                    echo $iMoney;
                 } else {
-                    $iMoney = $this->getRepostiroyMoney($iYear, $iMonth);
+                    // $iMoney = $this->getRepostiroyMoney($iYear, $iMonth);
+                    $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
+                    $iMoney = $this->getMoneyInMonth($iYear, $iMonth, 1, $iDayCount);
                 }
 
                 $iTotalBudge += $iMoney;
@@ -70,6 +74,5 @@ class Budget
         $iMoney = $this->getRepostiroyMoney($iYear, $iMonth) / $iDayCount * $iTotalDay;
         return $iMoney;
     }
-
 
 }

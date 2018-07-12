@@ -40,13 +40,8 @@ class Budget
             for ($iMonth = $iStartMonth; $iMonth <= $iEndMonth; $iMonth++) {
                 if ($iMonth == $iStartMonth) {
                     $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
-                    $iTotalDay = $iDayCount - $iStartday + 1;
-                    $iMoney = $this->getRepostiroyMoney($iYear, $iMonth) / $iDayCount * $iTotalDay;
-                    // $iMoney = $this->getMoneyInMonth($iYear, $iStartMonth, $iStartday, $iEndday);
+                    $iMoney = $this->getMoneyInMonth($iYear, $iStartMonth, $iStartday, $iDayCount);
                 } elseif ($iMonth == $iEndMonth) {
-                    // $iTotalDay = $iEndday;
-                    // $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
-                    // $iMoney = $this->getRepostiroyMoney($iYear, $iMonth) / $iDayCount * $iTotalDay;
                     $iMoney = $this->getMoneyInMonth($iYear, $iMonth, 1, $iEndday);
                 } else {
                     $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));

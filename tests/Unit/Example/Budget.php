@@ -30,19 +30,27 @@ class Budget
         $iEndday = $aEnd[2];
 
         for ($iYear = $iStartYear; $iYear <= $iEndYear; $iYear++) {
-            for ($iMonth = $iStartMonth; $iMonth <= $iEndMonth; $iMonth++) {
-                // if ($iStartMonth === $iEndMonth) {
+            # 同年同月
+            if ($iStartMonth === $iEndMonth) {
                 $iTotalDay = $iEndday - $iStartday + 1;
-                $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
-                $iMoney = $this->getRepostiroyMoney($iYear, $iMonth) / $iDayCount * $iTotalDay;
-                // } elseif ($iMonth === $iStartMonth) {
-
-                // } elseif ($iMonth === $iEndMonth) {
-
-                // } else {
-                $iTotalBudge += $iMoney;
-                // }
+                $iDayCount = date("t", strtotime($iYear . '-' . $iStartMonth));
+                $iMoney = $this->getRepostiroyMoney($iYear, $iStartMonth) / $iDayCount * $iTotalDay;
+                return $iMoney;
             }
+
+            # 有三種情況 頭月 中間月 尾月
+            // for ($iMonth = $iStartMonth; $iMonth <= $iEndMonth; $iMonth++) {
+            //     } elseif ($iMonth === $iStartMonth) {
+            //         // echo $iMonth;
+            //     } elseif ($iMonth === $iEndMonth) {
+            //         // echo $iMonth;
+            //     } else {
+            //         echo $iMonth;
+            //         $iMoney = $this->getRepostiroyMoney($iYear, $iMonth);
+            //     }
+
+            //     $iTotalBudge += $iMoney;
+            // }
         }
 
         return $iTotalBudge;

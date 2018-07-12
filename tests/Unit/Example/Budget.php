@@ -61,19 +61,21 @@ class Budget
             if ($iYear === $iStartYear) {
                 # 拆成兩種情況 第一個月 跟後面的月分
                 $iDayCount = date("t", strtotime($iYear . '-' . $iStartMonth));
-                $iMoney += $this->getMoneyInMonth($iYear, $iStartMonth, $iStartday, $iDayCount);
-                $iTotalBudge += $iMoney;
+                $iTotalBudge += $this->getMoneyInMonth($iYear, $iStartMonth, $iStartday, $iDayCount);
                 for ($iMonth = $iStartMonth + 1; $iMonth <= 12; $iMonth++) {
                     $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
-                    $iMoney = $this->getMoneyInMonth($iYear, $iMonth, 1, $iDayCount);
-
-                    $iTotalBudge += $iMoney;
+                    $iTotalBudge += $this->getMoneyInMonth($iYear, $iMonth, 1, $iDayCount);
                 }
             }
 
             # 最後一年
             if ($iYear === $iEndYear) {
-                # code...
+                # 拆成兩種情況 最後一個月 跟前面的月分
+                $iTotalBudge += $this->getMoneyInMonth($iYear, $iEndMonth, 1, $iEndday);
+                for ($iMonth = 1; $iMonth <= $iEndMonth - 1; $iMonth++) {
+                    $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
+                    $iTotalBudge += $this->getMoneyInMonth($iYear, $iMonth, 1, $iDayCount);
+                }
             }
 
             # 中間的

@@ -75,7 +75,7 @@ class BudgetTest extends TestCase
     public function testMultipleBudget()
     {
         $sStart = '2017-04-1';
-        $sEnd = '2018-04-15';
+        $sEnd = '2018-05-15';
         $oBudgetRepositorySub = Mockery::mock(BudgetRepository::class);
         $oBudgetRepositorySub->shouldReceive('getAllBudget')
             ->andReturn(array(
@@ -96,7 +96,7 @@ class BudgetTest extends TestCase
 
         $iAction = $oTarget->calculateMoney($sStart, $sEnd);
 
-        $this->assertEquals(3000 + 3100 + 3000 + 3100 + 1500, $iAction);
+        $this->assertEquals(3000 + 3100 + 3000 + 3100 + 3000 + 1500, $iAction);
     }
 
 }

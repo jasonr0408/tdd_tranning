@@ -80,13 +80,8 @@ class Budget
 
             # 中間的
             if ($iYear !== $iStartYear && $iYear !== $iEndYear) {
-                for ($iMonth = 1; $iMonth <= 12; $iMonth++) {
-                    $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
-                    $iTotalBudge += $this->getMoneyInMonth($iYear, $iMonth, 1, $iDayCount);
-                }
+                $iTotalBudge += $this->getMoneyInYear($iYear, 1, 12);
             }
-
-            // $iTotalBudge += $iMoney;
         }
 
         return $iTotalBudge;
@@ -107,5 +102,18 @@ class Budget
 
         return $iMoney;
     }
+
+    private function getMoneyInYear(int $_iYear, int $_iStartMonth, int $_iEndMonth) : int
+    {
+        $iTotalBudge = 0;
+        for ($iMonth = $_iStartMonth; $iMonth <= $_iEndMonth; $iMonth++) {
+            $iDayCount = date("t", strtotime($_iYear . '-' . $iMonth));
+            $iTotalBudge += $this->getMoneyInMonth($_iYear, $iMonth, 1, $iDayCount);
+        }
+
+        return $iTotalBudge;
+    }
+
+
 
 }

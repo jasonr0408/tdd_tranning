@@ -50,4 +50,15 @@ class BudgetTest extends TestCase
 
         $this->assertEquals($iExpect, $iAction);
     }
+
+    public function testTwoBudget()
+    {
+        $sStart = '2018-05-17';
+        $sEnd = '2018-07-15';
+        $iExpect = 6000;
+
+        $iAction = $this->oTarget->calculateMoney($sStart, $sEnd);
+
+        $this->assertEquals($iExpect, $iAction);
+    }
 }

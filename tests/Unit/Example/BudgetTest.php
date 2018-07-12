@@ -129,4 +129,42 @@ class BudgetTest extends TestCase
         $this->assertEquals(1000 + 3000 + 3100 + 3000 + 3100 + 3000 + 1500, $iAction);
     }
 
+    public function test_query_start_date_out_of_budgets()
+    {
+        $sStart = '2018-01-01';
+        $sEnd = '2018-04-15';
+
+        $iAction = $this->oTarget->calculateMoney($sStart, $sEnd);
+
+        $this->assertEquals(1500, $iAction);
+    }
+
+    public function test_query_end_date_out_of_budgets()
+    {
+        $sStart = '2018-07-31';
+        $sEnd = '2018-08-15';
+
+        $iAction = $this->oTarget->calculateMoney($sStart, $sEnd);
+
+        $this->assertEquals(100, $iAction);
+    }
+
+    public function test_default_amount_of_missing_budgets_is_0()
+    {
+        $sStart = '2018-01-01';
+        $sEnd = '2018-10-15';
+        $oBudgetRepositorySub = Mockery::mock(BudgetRepository::class);
+        $oBudgetRepositorySub->shouldReceive('getAllBudget')
+            ->andReturn(array(
+                2018 => array(
+                    4 => 3000,
+                    7 => 3100,
+                ),
+            ));
+        $oTarget = new Budget($oBudgetRepositorySub);
+
+        $iAction = $oTarget->calculateMoney($sStart, $sEnd);
+
+        $this->assertEquals(3000 + 3100, $iAction);
+    }
 }

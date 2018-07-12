@@ -1,5 +1,6 @@
 <?php
 namespace Tests\Unit\Example;
+
 use Tests\Unit\Example\BudgetRepository;
 
 class Budget
@@ -36,36 +37,51 @@ class Budget
                 # 同年同月
                 if ($iStartMonth === $iEndMonth) {
                     $iMoney = $this->getMoneyInMonth($iYear, $iStartMonth, $iStartday, $iEndday);
+                    # 快速return
                     return $iMoney;
+                }
+
+                # 有三種情況 頭月 尾月 中間月
+                for ($iMonth = $iStartMonth; $iMonth <= $iEndMonth; $iMonth++) {
+                    if ($iMonth === $iStartMonth) {
+                        $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
+                        $iMoney = $this->getMoneyInMonth($iYear, $iStartMonth, $iStartday, $iDayCount);
+                    } elseif ($iMonth === $iEndMonth) {
+                        $iMoney = $this->getMoneyInMonth($iYear, $iMonth, 1, $iEndday);
+                    } else {
+                        $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
+                        $iMoney = $this->getMoneyInMonth($iYear, $iMonth, 1, $iDayCount);
+                    }
+
+                    $iTotalBudge += $iMoney;
+                }
+                return $iTotalBudge;
+            }
+            # 第一年
+            if ($iYear === $iStartYear) {
+                # 拆成兩種情況 第一個月 跟後面的月分
+                $iDayCount = date("t", strtotime($iYear . '-' . $iStartMonth));
+                $iMoney += $this->getMoneyInMonth($iYear, $iStartMonth, $iStartday, $iDayCount);
+                $iTotalBudge += $iMoney;
+                for ($iMonth = $iStartMonth + 1; $iMonth <= 12; $iMonth++) {
+                    $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
+                    $iMoney = $this->getMoneyInMonth($iYear, $iMonth, 1, $iDayCount);
+
+                    $iTotalBudge += $iMoney;
                 }
             }
 
-            if ($iYear === $iStartYear) {
-                # code...
-            }
-
+            # 最後一年
             if ($iYear === $iEndYear) {
                 # code...
             }
 
+            # 中間的
             if ($iYear !== $iStartYear && $iYear !== $iEndYear) {
                 # code...
             }
 
-            # 有三種情況 頭月 尾月 中間月
-            for ($iMonth = $iStartMonth; $iMonth <= $iEndMonth; $iMonth++) {
-                if ($iMonth == $iStartMonth) {
-                    $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
-                    $iMoney = $this->getMoneyInMonth($iYear, $iStartMonth, $iStartday, $iDayCount);
-                } elseif ($iMonth == $iEndMonth) {
-                    $iMoney = $this->getMoneyInMonth($iYear, $iMonth, 1, $iEndday);
-                } else {
-                    $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
-                    $iMoney = $this->getMoneyInMonth($iYear, $iMonth, 1, $iDayCount);
-                }
-
-                $iTotalBudge += $iMoney;
-            }
+            // $iTotalBudge += $iMoney;
         }
 
         return $iTotalBudge;
@@ -78,11 +94,12 @@ class Budget
      * @param $iEndday
      * @return int
      */
-    private function getMoneyInMonth(int $iYear, int $iMonth, int $iStartday, int $iEndday) :int
+    private function getMoneyInMonth(int $iYear, int $iMonth, int $iStartday, int $iEndday): int
     {
         $iTotalDay = $iEndday - $iStartday + 1;
         $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
         $iMoney = $this->getMoney($iYear, $iMonth) / $iDayCount * $iTotalDay;
+
         return $iMoney;
     }
 

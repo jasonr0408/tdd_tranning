@@ -11,6 +11,12 @@ class BudgetTest extends TestCase
     # 2018-05 3100
     # 2018-06 3000
     # 2018-07 3100
+    private $oTarget;
+
+    public function SetUp()
+    {
+        $this->oTarget = new Budget();
+    }
 
     public function testNoBudget()
     {
@@ -18,8 +24,7 @@ class BudgetTest extends TestCase
         $sEnd = '2018-01-30';
         $iExpect = 0;
 
-        $oTarget = new Budget();
-        $iAction = $oTarget->calculateMoney($sStart, $sEnd);
+        $iAction = $this->oTarget->calculateMoney($sStart, $sEnd);
 
         $this->assertEquals($iExpect, $iAction);
     }
@@ -30,8 +35,7 @@ class BudgetTest extends TestCase
         $sEnd = '2018-05-31';
         $iExpect = 3100;
 
-        $oTarget = new Budget();
-        $iAction = $oTarget->calculateMoney($sStart, $sEnd);
+        $iAction = $this->oTarget->calculateMoney($sStart, $sEnd);
 
         $this->assertEquals($iExpect, $iAction);
     }

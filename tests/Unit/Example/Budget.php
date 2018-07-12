@@ -12,7 +12,6 @@ class Budget
                 '07' => 3100,
             ),
         );
-
         $iMoney = array_key_exists($_iMonth, $aBudgetList[$_iYear]) ? $aBudgetList[$_iYear][$_iMonth] : 0;
 
         return $iMoney;
@@ -31,14 +30,19 @@ class Budget
         $iEndday = $aEnd[2];
 
         for ($iYear = $iStartYear; $iYear <= $iEndYear; $iYear++) {
-            # 同一年
-            // if ($iStartYear === $iEndYear) {
             for ($iMonth = $iStartMonth; $iMonth <= $iEndMonth; $iMonth++) {
-                $iTotalBudge += $this->getRepostiroyMoney($iYear, $iMonth);
-            }
-            // } else {
+                // if ($iStartMonth === $iEndMonth) {
+                $iTotalDay = $iEndday - $iStartday + 1;
+                $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
+                $iMoney = $this->getRepostiroyMoney($iYear, $iMonth) / $iDayCount * $iTotalDay;
+                // } elseif ($iMonth === $iStartMonth) {
 
-            // }
+                // } elseif ($iMonth === $iEndMonth) {
+
+                // } else {
+                $iTotalBudge += $iMoney;
+                // }
+            }
         }
 
         return $iTotalBudge;

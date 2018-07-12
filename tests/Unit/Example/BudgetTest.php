@@ -1,8 +1,10 @@
 <?php
 namespace Tests\Unit\Example;
 
+use Mockery;
 use Tests\TestCase;
 use Tests\Unit\Example\Budget;
+use Tests\Unit\Example\BudgetRepository;
 
 class BudgetTest extends TestCase
 {
@@ -14,7 +16,17 @@ class BudgetTest extends TestCase
 
     public function SetUp()
     {
-        $this->oTarget = new Budget();
+        $oBudgetRepositorySub = Mockery::mock(BudgetRepository::class);
+        $oBudgetRepositorySub->shouldReceive('getAllBudget')
+            ->andReturn(array(
+                2018 => array(
+                    4 => 3000,
+                    5 => 3100,
+                    6 => 3000,
+                    7 => 3100,
+                ),
+            ));
+        $this->oTarget = new Budget($oBudgetRepositorySub);
     }
 
     public function testNoBudget()
@@ -60,13 +72,4 @@ class BudgetTest extends TestCase
         $this->assertEquals(1400 + 3000 + 1500, $iAction);
     }
 
-    public function testMultipleBudget()
-    {
-        $sStart = '2018-04-2';
-        $sEnd = '2018-07-15';
-
-        $iAction = $this->oTarget->calculateMoney($sStart, $sEnd);
-
-        $this->assertEquals(2900 + 3100 + 3000 + 1500, $iAction);
-    }
 }

@@ -1,18 +1,18 @@
 <?php
 namespace Tests\Unit\Example;
+use Tests\Unit\Example\BudgetRepository;
 
 class Budget
 {
-    private function getRepostiroyMoney($_iYear, $_iMonth)
+    private $oBudgetRepository;
+    public function __construct(BudgetRepository $_oBudgetRepository)
     {
-        $aBudgetList = array(
-            2018 => array(
-                4 => 3000,
-                5 => 3100,
-                6 => 3000,
-                7 => 3100,
-            ),
-        );
+        $this->oBudgetRepository = $_oBudgetRepository;
+    }
+
+    private function getMoney($_iYear, $_iMonth)
+    {
+        $aBudgetList = $this->oBudgetRepository->getAllBudget();
         $iMoney = array_key_exists($_iMonth, $aBudgetList[$_iYear]) ? $aBudgetList[$_iYear][$_iMonth] : 0;
 
         return $iMoney;
@@ -67,7 +67,7 @@ class Budget
     {
         $iTotalDay = $iEndday - $iStartday + 1;
         $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
-        $iMoney = $this->getRepostiroyMoney($iYear, $iMonth) / $iDayCount * $iTotalDay;
+        $iMoney = $this->getMoney($iYear, $iMonth) / $iDayCount * $iTotalDay;
         return $iMoney;
     }
 

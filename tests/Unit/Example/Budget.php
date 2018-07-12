@@ -32,11 +32,10 @@ class Budget
         for ($iYear = $iStartYear; $iYear <= $iEndYear; $iYear++) {
             # 同年同月
             if ($iStartMonth === $iEndMonth) {
-                $iTotalDay = $iEndday - $iStartday + 1;
-                $iDayCount = date("t", strtotime($iYear . '-' . $iStartMonth));
-                $iMoney = $this->getRepostiroyMoney($iYear, $iStartMonth) / $iDayCount * $iTotalDay;
+                $iMoney = $this->getMoneyInMonth($iYear, $iStartMonth, $iStartday, $iEndday);
                 return $iMoney;
             }
+
             # 有三種情況 頭月 中間月 尾月
             for ($iMonth = $iStartMonth; $iMonth <= $iEndMonth; $iMonth++) {
                 if ($iMonth == $iStartMonth) {
@@ -56,4 +55,21 @@ class Budget
 
         return $iTotalBudge;
     }
+
+    /**
+     * @param $iYear
+     * @param $iMonth
+     * @param $iStartday
+     * @param $iEndday
+     * @return float|int
+     */
+    private function getMoneyInMonth($iYear, $iMonth, $iStartday, $iEndday)
+    {
+        $iTotalDay = $iEndday - $iStartday + 1;
+        $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
+        $iMoney = $this->getRepostiroyMoney($iYear, $iMonth) / $iDayCount * $iTotalDay;
+        return $iMoney;
+    }
+
+
 }

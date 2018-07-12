@@ -60,9 +60,9 @@ class Budget
      * @param $iMonth
      * @param $iStartday
      * @param $iEndday
-     * @return float|int
+     * @return int
      */
-    private function getMoneyInMonth($iYear, $iMonth, $iStartday, $iEndday)
+    private function getMoneyInMonth(int $iYear, int $iMonth, int $iStartday, int $iEndday) :int
     {
         $iTotalDay = $iEndday - $iStartday + 1;
         $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));

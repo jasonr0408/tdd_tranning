@@ -2,7 +2,6 @@
 namespace Tests\Unit\Example;
 
 use Tests\TestCase;
-use Mockery;
 use Tests\Unit\Example\Budget;
 
 class BudgetTest extends TestCase
@@ -55,10 +54,9 @@ class BudgetTest extends TestCase
     {
         $sStart = '2018-05-18';
         $sEnd = '2018-07-15';
-        $iExpect = 5900;
 
         $iAction = $this->oTarget->calculateMoney($sStart, $sEnd);
 
-        $this->assertEquals($iExpect, $iAction);
+        $this->assertEquals(1400 + 3000 + 1500, $iAction);
     }
 }

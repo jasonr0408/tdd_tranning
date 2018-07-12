@@ -42,13 +42,13 @@ class Budget
                     $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
                     $iTotalDay = $iDayCount - $iStartday + 1;
                     $iMoney = $this->getRepostiroyMoney($iYear, $iMonth) / $iDayCount * $iTotalDay;
+                    // $iMoney = $this->getMoneyInMonth($iYear, $iStartMonth, $iStartday, $iEndday);
                 } elseif ($iMonth == $iEndMonth) {
-                    $iTotalDay = $iEndday;
-                    $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
-                    $iMoney = $this->getRepostiroyMoney($iYear, $iMonth) / $iDayCount * $iTotalDay;
-                    echo $iMoney;
+                    // $iTotalDay = $iEndday;
+                    // $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
+                    // $iMoney = $this->getRepostiroyMoney($iYear, $iMonth) / $iDayCount * $iTotalDay;
+                    $iMoney = $this->getMoneyInMonth($iYear, $iMonth, 1, $iEndday);
                 } else {
-                    // $iMoney = $this->getRepostiroyMoney($iYear, $iMonth);
                     $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
                     $iMoney = $this->getMoneyInMonth($iYear, $iMonth, 1, $iDayCount);
                 }

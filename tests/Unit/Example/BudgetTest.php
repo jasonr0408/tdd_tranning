@@ -53,9 +53,9 @@ class BudgetTest extends TestCase
 
     public function testTwoBudget()
     {
-        $sStart = '2018-05-17';
+        $sStart = '2018-05-18';
         $sEnd = '2018-07-15';
-        $iExpect = 6000;
+        $iExpect = 5900;
 
         $iAction = $this->oTarget->calculateMoney($sStart, $sEnd);
 

@@ -36,25 +36,18 @@ class Budget
             if ($iStartYear === $iEndYear) {
                 # 同年同月
                 if ($iStartMonth === $iEndMonth) {
-                    $iMoney = $this->getMoneyInMonth($iYear, $iStartMonth, $iStartday, $iEndday);
+                    $iTotalBudge = $this->getMoneyInMonth($iYear, $iStartMonth, $iStartday, $iEndday);
                     # 快速return
-                    return $iMoney;
+                    return $iTotalBudge;
                 }
 
                 # 有三種情況 頭月 尾月 中間月
-                for ($iMonth = $iStartMonth; $iMonth <= $iEndMonth; $iMonth++) {
-                    if ($iMonth === $iStartMonth) {
-                        $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
-                        $iMoney = $this->getMoneyInMonth($iYear, $iStartMonth, $iStartday, $iDayCount);
-                    } elseif ($iMonth === $iEndMonth) {
-                        $iMoney = $this->getMoneyInMonth($iYear, $iMonth, 1, $iEndday);
-                    } else {
-                        $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
-                        $iMoney = $this->getMoneyInMonth($iYear, $iMonth, 1, $iDayCount);
-                    }
+                # 中間月
+                $iTotalBudge += $this->getMoneyInYear($iYear, $iStartMonth + 1, $iEndMonth - 1);
+                $iDayCount = date("t", strtotime($iYear . '-' . $iStartMonth));
+                $iTotalBudge += $this->getMoneyInMonth($iYear, $iStartMonth, $iStartday, $iDayCount);
+                $iTotalBudge += $this->getMoneyInMonth($iYear, $iEndMonth, 1, $iEndday);
 
-                    $iTotalBudge += $iMoney;
-                }
                 return $iTotalBudge;
             }
             # 第一年
@@ -97,7 +90,7 @@ class Budget
         return $iMoney;
     }
 
-    private function getMoneyInYear(int $_iYear, int $_iStartMonth, int $_iEndMonth) : int
+    private function getMoneyInYear(int $_iYear, int $_iStartMonth, int $_iEndMonth): int
     {
         $iTotalBudge = 0;
         for ($iMonth = $_iStartMonth; $iMonth <= $_iEndMonth; $iMonth++) {
@@ -107,7 +100,5 @@ class Budget
 
         return $iTotalBudge;
     }
-
-
 
 }

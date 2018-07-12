@@ -80,7 +80,10 @@ class Budget
 
             # 中間的
             if ($iYear !== $iStartYear && $iYear !== $iEndYear) {
-                # code...
+                for ($iMonth = 1; $iMonth <= 12; $iMonth++) {
+                    $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));
+                    $iTotalBudge += $this->getMoneyInMonth($iYear, $iMonth, 1, $iDayCount);
+                }
             }
 
             // $iTotalBudge += $iMoney;

@@ -31,13 +31,28 @@ class Budget
         $iEndday = (int) $aEnd[2];
 
         for ($iYear = $iStartYear; $iYear <= $iEndYear; $iYear++) {
-            # 同年同月
-            if ($iStartMonth === $iEndMonth) {
-                $iMoney = $this->getMoneyInMonth($iYear, $iStartMonth, $iStartday, $iEndday);
-                return $iMoney;
+            # 有四種情況 前後同年 開始年 結束年 中間年
+            if ($iStartYear === $iEndYear) {
+                # 同年同月
+                if ($iStartMonth === $iEndMonth) {
+                    $iMoney = $this->getMoneyInMonth($iYear, $iStartMonth, $iStartday, $iEndday);
+                    return $iMoney;
+                }
             }
 
-            # 有三種情況 頭月 中間月 尾月
+            if ($iYear === $iStartYear) {
+                # code...
+            }
+
+            if ($iYear === $iEndYear) {
+                # code...
+            }
+
+            if ($iYear !== $iStartYear && $iYear !== $iEndYear) {
+                # code...
+            }
+
+            # 有三種情況 頭月 尾月 中間月
             for ($iMonth = $iStartMonth; $iMonth <= $iEndMonth; $iMonth++) {
                 if ($iMonth == $iStartMonth) {
                     $iDayCount = date("t", strtotime($iYear . '-' . $iMonth));

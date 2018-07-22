@@ -3,7 +3,7 @@ namespace Tests\Unit\Example;
 
 use Tests\Unit\Example\BudgetRepository;
 
-class Budget
+class BudgetService
 {
     private $oBudgetRepository;
     public function __construct(BudgetRepository $_oBudgetRepository)
@@ -11,7 +11,7 @@ class Budget
         $this->oBudgetRepository = $_oBudgetRepository;
     }
 
-    private function getMoney($_iYear, $_iMonth)
+    private function getMoney(int $_iYear, int $_iMonth) :int
     {
         $aBudgetList = $this->oBudgetRepository->getAllBudget();
         $iMoney = array_key_exists($_iMonth, $aBudgetList[$_iYear]) ? $aBudgetList[$_iYear][$_iMonth] : 0;

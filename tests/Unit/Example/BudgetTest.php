@@ -3,7 +3,7 @@ namespace Tests\Unit\Example;
 
 use Mockery;
 use Tests\TestCase;
-use Tests\Unit\Example\Budget;
+use Tests\Unit\Example\BudgetService;
 use Tests\Unit\Example\BudgetRepository;
 
 class BudgetTest extends TestCase
@@ -26,7 +26,7 @@ class BudgetTest extends TestCase
                     7 => 3100,
                 ),
             ));
-        $this->oTarget = new Budget($oBudgetRepositorySub);
+        $this->oTarget = new BudgetService($oBudgetRepositorySub);
     }
 
     public function testNoBudget()
@@ -92,7 +92,7 @@ class BudgetTest extends TestCase
                     7 => 3100,
                 ),
             ));
-        $oTarget = new Budget($oBudgetRepositorySub);
+        $oTarget = new BudgetService($oBudgetRepositorySub);
 
         $iAction = $oTarget->calculateMoney($sStart, $sEnd);
 
@@ -122,7 +122,7 @@ class BudgetTest extends TestCase
                     7 => 3100,
                 ),
             ));
-        $oTarget = new Budget($oBudgetRepositorySub);
+        $oTarget = new BudgetService($oBudgetRepositorySub);
 
         $iAction = $oTarget->calculateMoney($sStart, $sEnd);
 
@@ -161,7 +161,7 @@ class BudgetTest extends TestCase
                     7 => 3100,
                 ),
             ));
-        $oTarget = new Budget($oBudgetRepositorySub);
+        $oTarget = new BudgetService($oBudgetRepositorySub);
 
         $iAction = $oTarget->calculateMoney($sStart, $sEnd);
 

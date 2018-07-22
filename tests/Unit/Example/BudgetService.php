@@ -1,9 +1,9 @@
 <?php
 namespace Tests\Unit\Example;
-
 use Tests\Unit\Example\BudgetRepository;
+use Tests\Unit\Example\BudgetInterface;
 
-class BudgetService
+class BudgetService implements BudgetInterface
 {
     private $oBudgetRepository;
     public function __construct(BudgetRepository $_oBudgetRepository)

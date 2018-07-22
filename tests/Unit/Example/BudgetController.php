@@ -2,13 +2,13 @@
 namespace Tests\Unit\Example;
 
 use Request;
-use Tests\Unit\Example\BudgetService;
+use Tests\Unit\Example\BudgetInterface;
 use Validator;
 
 class BudgetController
 {
     private $oBudgetService;
-    public function __construct(BudgetService $_oBudgetService)
+    public function __construct(BudgetInterface $_oBudgetService)
     {
         $this->oBudgetService = $_oBudgetService;
     }

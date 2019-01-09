@@ -1,9 +1,7 @@
 <?php
 namespace Tests\Unit\Example;
 
-class BudgetInterface
+interface BudgetInterface
 {
-    public function calculateMoney(string $sStart, string $sEnd): int
-    {
-    }
+    public function calculateMoney(string $sStart, string $sEnd);
 }

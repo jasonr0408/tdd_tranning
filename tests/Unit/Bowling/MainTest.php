@@ -46,4 +46,17 @@ class MainTest extends TestCase
         $this->assertEquals($bExpect, $bActual);
     }
 
+    public function testAllOneSpare()
+    {
+        $bExpect = 16;
+        $this->oMain->roll(3);
+        $this->oMain->roll(7);
+        $this->oMain->roll(3);
+        $this->rollMany(17, 0);
+
+        $bActual = $this->oMain->score();
+
+        $this->assertEquals($bExpect, $bActual);
+    }
+
 }

@@ -13,8 +13,16 @@ namespace Tests\Unit\Bowling;
 // 分數功能要每次丟球反覆計算。分數計算需依賴下一局。
 class Main
 {
+    private $iTotal = 0;
+
+    public function roll(int $iPins) : int
+    {
+        $this->iTotal += $iPins;
+        return $iPins;
+    }
+
     public function score()
     {
-        return true;
+        return $this->iTotal;
     }
 }

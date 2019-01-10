@@ -22,7 +22,22 @@ class MainTest extends TestCase
 
         $oMain = new Main();
         $x = 0;
-        for ($i=0; $i < 21; $i++) {
+        for ($i=0; $i < 20; $i++) {
+            $oMain->roll($x);
+        }
+
+        $bActual = $oMain->score();
+
+        $this->assertEquals($bExpect, $bActual);
+    }
+
+    public function testAllOneRoll()
+    {
+        $bExpect = 20;
+
+        $oMain = new Main();
+        $x = 1;
+        for ($i=0; $i < 20; $i++) {
             $oMain->roll($x);
         }
 

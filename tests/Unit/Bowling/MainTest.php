@@ -16,11 +16,15 @@ class MainTest extends TestCase
     {
     }
 
-    public function testScore()
+    public function testNothingRoll()
     {
-        $bExpect = true;
+        $bExpect = 0;
 
         $oMain = new Main();
+        $x = 0;
+        for ($i=0; $i < 21; $i++) {
+            $oMain->roll($x);
+        }
 
         $bActual = $oMain->score();
 

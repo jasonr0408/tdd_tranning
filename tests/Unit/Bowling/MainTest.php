@@ -1,7 +1,6 @@
 <?php
 namespace Tests\Unit\Bowling;
 
-use Mockery;
 use Tests\TestCase;
 use Tests\Unit\Bowling\Main;
 
@@ -12,21 +11,27 @@ use Tests\Unit\Bowling\Main;
 // 4. 只寫測試案例，測試one Spare
 class MainTest extends TestCase
 {
+    private $oMain;
+
     public function SetUp()
     {
+        $this->oMain = new Main();
+    }
+
+    private function rollMany(int $iTimes, int $iPins)
+    {
+        $x = 0;
+        for ($i = 0; $i < $iTimes; $i++) {
+            $this->oMain->roll($iPins);
+        }
     }
 
     public function testNothingRoll()
     {
         $bExpect = 0;
+        $this->rollMany(20, 0);
 
-        $oMain = new Main();
-        $x = 0;
-        for ($i=0; $i < 20; $i++) {
-            $oMain->roll($x);
-        }
-
-        $bActual = $oMain->score();
+        $bActual = $this->oMain->score();
 
         $this->assertEquals($bExpect, $bActual);
     }
@@ -34,14 +39,9 @@ class MainTest extends TestCase
     public function testAllOneRoll()
     {
         $bExpect = 20;
+        $this->rollMany(20, 1);
 
-        $oMain = new Main();
-        $x = 1;
-        for ($i=0; $i < 20; $i++) {
-            $oMain->roll($x);
-        }
-
-        $bActual = $oMain->score();
+        $bActual = $this->oMain->score();
 
         $this->assertEquals($bExpect, $bActual);
     }
